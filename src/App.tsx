@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   XCircle,
 } from "lucide-react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 type Flashcard = {
   question: string;
@@ -110,7 +111,7 @@ function App() {
 
       // Upload PDF
       const uploadResponse = await axios.post(
-        "http://localhost:5000/api/upload",
+        `${API_URL}/api/upload`,
         formData
       );
 
@@ -125,7 +126,7 @@ function App() {
       console.log("Sending extracted text to Gemini...");
 
       const analysisResponse = await axios.post(
-        "http://localhost:5000/api/analyze",
+        `${API_URL}/api/analyze`,
         {
           text: extractedText,
         }
@@ -213,7 +214,7 @@ function App() {
       console.log("Asking MindPilot:", question);
 
      const response = await axios.post(
-  "http://localhost:5000/api/ask",
+  `${API_URL}/api/ask`,
   {
     question: question.trim(),
   }
